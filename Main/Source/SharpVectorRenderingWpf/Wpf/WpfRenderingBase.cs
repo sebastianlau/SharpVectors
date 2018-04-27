@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 
 using SharpVectors.Dom.Svg;
@@ -73,6 +74,9 @@ namespace SharpVectors.Renderers.Wpf
             string elementId = _svgElement.Id;
             if (elementId != null)
             {
+                if (elementId != "" && !Regex.IsMatch(elementId, @"^(_|[a-z]|[A-Z]).+$"))
+                    elementId = "_" + elementId;
+                elementId = Regex.Replace(elementId, " *[\\~#%&*{}/:<>?|\"-]+ *", "");
                 elementId = elementId.Trim();
             }
             if (String.IsNullOrEmpty(elementId))
