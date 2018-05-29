@@ -462,114 +462,114 @@ namespace SharpVectors.Runtime
         {
             base.OnMouseMove(e);
 
-            if (_animationCanvas != null && _animationCanvas.HandleMouseMove(e))
-            {
-                return;
-            }
+            //if (_animationCanvas != null && _animationCanvas.HandleMouseMove(e))
+            //{
+            //    return;
+            //}
 
-            // Retrieve the coordinates of the mouse button event.
-            Point pt = e.GetPosition(this);
+            //// Retrieve the coordinates of the mouse button event.
+            //Point pt = e.GetPosition(this);
 
-            Drawing hitVisual = HitTest(pt);
+            // Drawing hitVisual = HitTest(pt);
 
-            //string itemName = null;
+            ////string itemName = null;
 
-            if (hitVisual == null)
-            {
-                this.Cursor = Cursors.Arrow;
+            //if (hitVisual == null)
+            //{
+            //    this.Cursor = Cursors.Arrow;
 
-                if (_hitVisual != null)
-                {
-                    //itemName = _hitVisual.GetValue(FrameworkElement.NameProperty) as string;
-                    //if (itemName == null)
-                    //{
-                    //    _hitVisual = null;
-                    //    return;
-                    //}
-                    //if (_visualBrushes.ContainsKey(itemName))
-                    //{
-                    //    Brush brush = _visualBrushes[itemName];
-                    //    brush.Opacity = 0;
-                    //}
-                    _hitVisual = null;
-                }
+            //    if (_hitVisual != null)
+            //    {
+            //        //itemName = _hitVisual.GetValue(FrameworkElement.NameProperty) as string;
+            //        //if (itemName == null)
+            //        //{
+            //        //    _hitVisual = null;
+            //        //    return;
+            //        //}
+            //        //if (_visualBrushes.ContainsKey(itemName))
+            //        //{
+            //        //    Brush brush = _visualBrushes[itemName];
+            //        //    brush.Opacity = 0;
+            //        //}
+            //        _hitVisual = null;
+            //    }
 
-                if (_tooltip != null)
-                {
-                    _tooltip.IsOpen = false;
-                    _tooltip.Visibility = Visibility.Hidden;
-                }
+            //    if (_tooltip != null)
+            //    {
+            //        _tooltip.IsOpen = false;
+            //        _tooltip.Visibility = Visibility.Hidden;
+            //    }
 
-                return;
-            }
-            else
-            {
-                this.Cursor = Cursors.Hand;
+            //    return;
+            //}
+            //else
+            //{
+            //    this.Cursor = Cursors.Hand;
 
-                if (hitVisual == _hitVisual)
-                {
-                    return;
-                }
+            //    if (hitVisual == _hitVisual)
+            //    {
+            //        return;
+            //    }
 
-                if (_hitVisual != null)
-                {
-                    //itemName = _hitVisual.GetValue(FrameworkElement.NameProperty) as string;
-                    //if (itemName == null)
-                    //{
-                    //    _hitVisual = null;
-                    //    return;
-                    //}
-                    //if (_visualBrushes.ContainsKey(itemName))
-                    //{
-                    //    Brush brush = _visualBrushes[itemName];
-                    //    brush.Opacity = 0;
-                    //}
-                    _hitVisual = null;
-                }
+            //    if (_hitVisual != null)
+            //    {
+            //        //itemName = _hitVisual.GetValue(FrameworkElement.NameProperty) as string;
+            //        //if (itemName == null)
+            //        //{
+            //        //    _hitVisual = null;
+            //        //    return;
+            //        //}
+            //        //if (_visualBrushes.ContainsKey(itemName))
+            //        //{
+            //        //    Brush brush = _visualBrushes[itemName];
+            //        //    brush.Opacity = 0;
+            //        //}
+            //        _hitVisual = null;
+            //    }
 
-                //itemName = hitVisual.GetValue(FrameworkElement.NameProperty) as string;
-                //if (itemName == null)
-                //{
-                //    return;
-                //}
-                //if (_visualBrushes.ContainsKey(itemName))
-                //{
-                //    Brush brush = _visualBrushes[itemName];
-                //    brush.Opacity = 0.5;
-                //}
-                _hitVisual = hitVisual;
+            //    //itemName = hitVisual.GetValue(FrameworkElement.NameProperty) as string;
+            //    //if (itemName == null)
+            //    //{
+            //    //    return;
+            //    //}
+            //    //if (_visualBrushes.ContainsKey(itemName))
+            //    //{
+            //    //    Brush brush = _visualBrushes[itemName];
+            //    //    brush.Opacity = 0.5;
+            //    //}
+            //    _hitVisual = hitVisual;
 
-                string tooltipText = SvgObject.GetTitle(_hitVisual);
-                Rect rectBounds = _hitVisual.Bounds;
-                //Drawing drawing = _hitVisual.GetValue(FrameworkElement.TagProperty) as Drawing;
-                //if (drawing != null)
-                //{
-                //    rectBounds  = drawing.Bounds; 
-                //    tooltipText = SvgObject.GetTitle(drawing);
-                //}
+            //    string tooltipText = SvgObject.GetTitle(_hitVisual);
+            //    Rect rectBounds = _hitVisual.Bounds;
+            //    //Drawing drawing = _hitVisual.GetValue(FrameworkElement.TagProperty) as Drawing;
+            //    //if (drawing != null)
+            //    //{
+            //    //    rectBounds  = drawing.Bounds; 
+            //    //    tooltipText = SvgObject.GetTitle(drawing);
+            //    //}
 
-                if (_tooltip != null && !String.IsNullOrEmpty(tooltipText))
-                {
-                    _tooltip.PlacementRectangle = rectBounds;
+            //    if (_tooltip != null && !String.IsNullOrEmpty(tooltipText))
+            //    {
+            //        _tooltip.PlacementRectangle = rectBounds;
 
-                    _tooltipText.Text = tooltipText;
+            //        _tooltipText.Text = tooltipText;
 
-                    if (_tooltip.Visibility == Visibility.Hidden)
-                    {
-                        _tooltip.Visibility = Visibility.Visible;
-                    }
+            //        if (_tooltip.Visibility == Visibility.Hidden)
+            //        {
+            //            _tooltip.Visibility = Visibility.Visible;
+            //        }
 
-                    _tooltip.IsOpen = true;
-                }
-                else
-                {
-                    if (_tooltip != null)
-                    {
-                        _tooltip.IsOpen = false;
-                        _tooltip.Visibility = Visibility.Hidden;
-                    }
-                }
-            }
+            //        _tooltip.IsOpen = true;
+            //    }
+            //    else
+            //    {
+            //        if (_tooltip != null)
+            //        {
+            //            _tooltip.IsOpen = false;
+            //            _tooltip.Visibility = Visibility.Hidden;
+            //        }
+            //    }
+            //}
         }
 
         protected override void OnMouseUp(MouseButtonEventArgs e)

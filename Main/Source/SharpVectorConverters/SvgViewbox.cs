@@ -5,11 +5,12 @@ using System.Xml;
 using System.Reflection;
 using System.Globalization;
 using System.ComponentModel;
-
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Markup;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Resources;
 
 using SharpVectors.Runtime;
@@ -58,8 +59,21 @@ namespace SharpVectors.Converters
             _includeRuntime = true;
             _optimizePath   = true;
             _drawingCanvas  = new SvgDrawingCanvas();
-
+            
             this.Child      = _drawingCanvas;
+        }
+
+        static SvgViewbox()
+        {
+            CursorProperty.OverrideMetadata(typeof(SvgViewbox), new FrameworkPropertyMetadata(Cursors.Arrow, PropertyChanged));
+            ToolTipProperty.OverrideMetadata(typeof(SvgViewbox), new FrameworkPropertyMetadata(null, PropertyChanged));
+        }
+
+        private static void PropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var canvas = (SvgDrawingCanvas)((SvgViewbox)sender).Child;
+            var prop = typeof(SvgDrawingCanvas).GetProperty(e.Property.Name);
+            prop.SetValue(canvas, e.NewValue, null);
         }
 
         #endregion
